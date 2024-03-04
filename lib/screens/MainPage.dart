@@ -4,6 +4,8 @@ import 'WordsListPage.dart';
 import '../DatabaseHelper.dart'; // Upewnij się, że ta klasa jest poprawnie zaimplementowana
 
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   @override
   _MainPageState createState() => _MainPageState();
 }

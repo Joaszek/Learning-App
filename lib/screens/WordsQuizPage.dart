@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'Word.dart';
+import 'package:learningapp/model/Word.dart';
 
 class WordsQuizPage extends StatelessWidget {
   final List<Word> words = [
     Word(english: 'Hello', korean: '안녕하세요', level: 'no idea'),
   ];
 
+  WordsQuizPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Learn Korean'),
+        title: const Text('Learn Korean'),
       ),
       body: Column(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.all(16),
-            child: Text(
+            padding: const EdgeInsets.all(16),
+            child: const Text(
               'Word List',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
@@ -37,9 +39,9 @@ class WordsQuizPage extends StatelessWidget {
             flex: 1,
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               color: Colors.blueGrey[50],
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Quiz Section',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

@@ -8,7 +8,7 @@ class WordsListPage extends StatelessWidget {
   final String level;
   DatabaseHelper dbHelper = DatabaseHelper();
 
-  WordsListPage({required this.words, required this.level});
+  WordsListPage({super.key, required this.words, required this.level});
 
   @override
   Widget build(BuildContext context) {

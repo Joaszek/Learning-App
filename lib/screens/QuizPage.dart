@@ -7,7 +7,7 @@ class QuizPage extends StatefulWidget {
   final List<Word> words;
   DatabaseHelper dbHelper = DatabaseHelper();
 
-  QuizPage({required this.words, required this.dbHelper});
+  QuizPage({super.key, required this.words, required this.dbHelper});
 
   @override
   _QuizPageState createState() => _QuizPageState();
