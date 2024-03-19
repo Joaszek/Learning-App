@@ -98,8 +98,7 @@ class _QuizPageState extends State<QuizPage> {
           FloatingActionButton(
             onPressed: () {
               _saveWords();
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const MainPage()));
+              Navigator.of(context).popUntil((route) => route.isFirst);
             },
             child: const Icon(Icons.save),
           ),
