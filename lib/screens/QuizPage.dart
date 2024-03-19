@@ -99,7 +99,7 @@ class _QuizPageState extends State<QuizPage> {
             onPressed: () {
               _saveWords();
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => MainPage()));
+                  context, MaterialPageRoute(builder: (context) => const MainPage()));
             },
             child: const Icon(Icons.save),
           ),
