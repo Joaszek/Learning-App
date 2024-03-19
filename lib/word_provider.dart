@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learningapp/model/Word.dart';
+import 'package:learningapp/model/word.dart';
 
 class WordProvider extends ChangeNotifier {
   final List<Word> _words = [];

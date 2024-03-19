@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learningapp/screens/MainPage.dart';
+import 'package:learningapp/screens/main_page.dart';
 import 'package:learningapp/word_provider.dart';
 import 'package:provider/provider.dart';
 
