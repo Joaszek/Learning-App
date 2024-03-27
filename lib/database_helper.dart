@@ -64,18 +64,24 @@ class DatabaseHelper {
     final String contents =
         await rootBundle.loadString('assets/data/words.txt');
     final List<String> lines = contents.split('\n');
-    for (var line in lines) {
-      final parts = line.split(';');
-      if (parts.length >= 2) {
-        Word word = Word(
-            english: parts[0].trim(),
-            korean: parts[1].trim(),
-            level: 'no idea',
-            correctStreak: 0,
-            incorrectStreak: 0);
-        await insertWord(word);
-      }
-    }
+    final List<Word?> words = lines
+        .map((line) {
+          final parts = line.split(';');
+          if (parts.length >= 2) {
+            return Word(
+              english: parts[0].trim(),
+              korean: parts[1].trim(),
+              level: 'no idea',
+              correctStreak: 0,
+              incorrectStreak: 0,
+            );
+          }
+          return null;
+        })
+        .where((word) => word != null)
+        .toList();
+
+    await Future.wait(words.map((word) => insertWord(word!)));
   }
 
   Future<bool> isWordTableEmpty() async {
