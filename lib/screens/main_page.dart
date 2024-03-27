@@ -76,6 +76,9 @@ class _MainPageState extends State<MainPage> {
             TextButton(
               child: const Text('Add'),
               onPressed: () async {
+                if(englishController.text.isEmpty || koreanController.text.isEmpty) {
+                  return;
+                }
                 await _dbHelper.insertWord(Word(
                     english: englishController.text,
                     korean: koreanController.text,
