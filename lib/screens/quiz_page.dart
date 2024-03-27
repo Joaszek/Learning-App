@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../model/word.dart';
+
 import '../database_helper.dart';
-import 'main_page.dart';
+import '../model/word.dart';
 
 class QuizPage extends StatefulWidget {
   final List<Word> words;
@@ -36,6 +36,7 @@ class _QuizPageState extends State<QuizPage> {
           currentWord.correctStreak = 0;
           currentWord.incorrectStreak = 0;
         }
+        _nextWord();
       } else {
         currentWord.incorrectStreak++;
         if (currentWord.incorrectStreak == 3) {
@@ -111,6 +112,5 @@ class _QuizPageState extends State<QuizPage> {
     for (var word in widget.words) {
       await DatabaseHelper.instance.insertWord(word);
     }
-    Navigator.of(context);
   }
 }
