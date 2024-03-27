@@ -1,0 +1,16 @@
+hello;안녕
+goodbye to the person who is leaving;안녕히 가세요
+goodbye to the person who is staying;안녕히 게세요
+nice to meet you;만나서 반가위요
+what's your name;이름이 뭐에요
+the United States of America;미국
+China;중국 
+Japan;일본
+India;인도
+teacher;산생님
+student;학생
+doctor;의사
+here(close);요기
+mr/miss/mrs/ms;씨
+I( as the person);저
+this person;이분

@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'model/word.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class DatabaseHelper {
   DatabaseHelper._privateConstructor();
@@ -12,6 +13,17 @@ class DatabaseHelper {
   Future<Database> get database async {
     if (_database != null) return _database!;
     _database = await _initDatabase();
+    // Load and insert words right after the database initialization
+    if (await isWordTableEmpty()) {
+      print("The database is empty.");
+    } else {
+      print("The database is not empty.");
+    }
+    _loadWordsAndInsert().then((_) {
+      print('Initial data populated successfully');
+    }).catchError((error) {
+      print('Failed to populate initial data: $error');
+    });
     return _database!;
   }
 
@@ -49,5 +61,40 @@ class DatabaseHelper {
     return List.generate(maps.length, (i) {
       return Word.fromMap(maps[i]);
     });
+  }
+
+  Future<void> _loadWordsAndInsert() async {
+    final String contents =
+        await rootBundle.loadString('assets/data/words.txt');
+    final List<String> lines = contents.split('\n');
+    for (var line in lines) {
+      final parts = line.split(';');
+      if (parts.length >= 2) {
+        Word word = Word(
+            english: parts[0].trim(),
+            korean: parts[1].trim(),
+            level: 'no idea',
+            correctStreak: 0,
+            incorrectStreak: 0);
+        await insertWord(word);
+      }
+    }
+  }
+
+  Future<bool> isWordTableEmpty() async {
+    // Define the path to your database
+    String dbPath = join(await getDatabasesPath(), 'word_database.db');
+
+    // Open the database
+    final Database db = await openDatabase(dbPath);
+
+    final List<Map<String, dynamic>> result =
+        await db.rawQuery('SELECT COUNT(*) AS count FROM Word');
+    final int count = result[0]['count'];
+
+    // Close the database to avoid memory leaks
+    await db.close();
+
+    return count == 0; // Returns true if empty, false otherwise
   }
 }
