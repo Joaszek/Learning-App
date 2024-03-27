@@ -4,7 +4,7 @@ goodbye to the person who is staying;안녕히 게세요
 nice to meet you;만나서 반가위요
 what's your name;이름이 뭐에요
 the United States of America;미국
-China;중국 
+China;중국
 Japan;일본
 India;인도
 teacher;산생님

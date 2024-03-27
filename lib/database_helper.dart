@@ -15,15 +15,12 @@ class DatabaseHelper {
     _database = await _initDatabase();
     // Load and insert words right after the database initialization
     if (await isWordTableEmpty()) {
-      print("The database is empty.");
-    } else {
-      print("The database is not empty.");
+      _loadWordsAndInsert().then((_) {
+        print('Initial data populated successfully');
+      }).catchError((error) {
+        print('Failed to populate initial data: $error');
+      });
     }
-    _loadWordsAndInsert().then((_) {
-      print('Initial data populated successfully');
-    }).catchError((error) {
-      print('Failed to populate initial data: $error');
-    });
     return _database!;
   }
 
@@ -89,11 +86,12 @@ class DatabaseHelper {
     final Database db = await openDatabase(dbPath);
 
     final List<Map<String, dynamic>> result =
-        await db.rawQuery('SELECT COUNT(*) AS count FROM Word');
+        await db.rawQuery('SELECT COUNT(*) AS count FROM words');
     final int count = result[0]['count'];
 
     // Close the database to avoid memory leaks
-    await db.close();
+    // our operations continues after this so we should close it later
+    // await db.close();
 
     return count == 0; // Returns true if empty, false otherwise
   }
